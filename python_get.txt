@@ -1,0 +1,147 @@
+1.在linux下安装了python2和python3,./name.py运行时报错，使用python3 name.py
+2.print() 打印到控制台
+3.input() 接收控制台的输入
+4.约定：使用四个空格作为缩进
+5.转义字符：\;
+	r''表示'' 内部的字符串默认不转义;
+	'''...'''表示多行内容 ...提示符接着上行输入
+6.布尔值：True,Flase 注意大小写
+	and与 or或 not非
+7.空值：None
+8.除法运算：/计算结果是浮点数;
+			//地板除 取结果的整数部分
+			%取余
+9.ord()获取字符的整数表示
+	chr()把编码转换为对应的字符、
+	len()计算包含的字符数或字节数
+10.b'str'转换为义字节为单位的bytes
+	str.encode()编码为指定的bytes
+	b'str'.decode()将bytes转换为str,
+	b'str'.decode('',errors='ignore')忽略错误字节
+11.格式化字符串：%d 整数 %f 浮点数 %s 字符串 %x 十六进制整数 转义字符%
+12.str.format()替换str中的{}
+13.list列表的操作：追加元素到末尾：append(str)
+					插入指定位置：insert(i,str) i是索引位置
+					删除末尾元素：pop()
+					删除指定位置：pop(i) i是索引位置
+14.tuple元组；一旦初始化就不能修改,每个元素的指向不变，若指向list,list的元素是可变的
+			定义只有一个元素的元组，需要逗号消除歧义 t=(1,)
+15.range(int) 生成整数序列 从0到int-1的所有整数
+16.ininstance(ins,OBJ) 检查ins是否是OBJ的实例
+17.函数的返回值类型为tuple
+18.函数参数：参数定义的顺序：必选参数、默认参数、可变参数、命名关键字参数、关键字参数
+	位置参数(必选参数) calc(x)
+	默认参数：默认参数必须指向不变对象 calc(x,y=0)
+	可变参数：calc(x,y=0,*z) 函数接收的是tuple
+		若在list或tuple前加*，*list把list的所有元素作为可变参数传入
+	关键字参数：calc(x,y=0,*z,**a) 函数接收的是dict
+		若在dict前加**，**dict把dict的所有key-value作为关键字参数传入
+	命名关键字参数：calc(x,y=0,*,z) 分隔符*后的参数被视为命名关键字参数，参数名必须传入，可以默认参数
+		calc(x,y=0,*z,a) 若函数中已经有可变参数，则后面的命名关键字参数不在需要分隔符*
+19.尾递归：在函数返回时，调用自身，并且return语句不能包含表达式，效果和循环一致
+			优化后，梯队本身无论调用多少次，都只占用一个栈帧，不会出现栈溢出
+20.迭代dict:for key in d ;for value in d.values() ;for k,v in d.items()
+	判断是否可迭代：isintance(obj,collections.Iterable)
+21.列表生成式：[x*x for x in range(1,11) if x%2==0] 可以做循环，做判断，生成列表
+	[m+n for m in 'abc' for n in 'xyz'] ;[for k,v in d.items()]
+22.生成器generator：(x*x for x in range(1,11) if x%2==0) 列表生成式[]替换为()
+	函数中包含yield关键字时，即为generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行从上次返回的yield语句处继续执行
+	generator的返回值包含在StopIteration错误的value中
+23.可作用于for循环的对象是Iterable类型
+	可作用于next()函数的对象是Iterator类型，表示惰性计算的序列
+	generator是Iterator对象，list、dict、str是Iterable，但不是Iterator;Iterable使用iter()变成Iterator
+24.变量__slot__=('name1','name2'..) 用tuple定义允许绑定的属性名称,仅当前类实例有效。
+	若子类也定义了__slot__,则其允许定义的属性就是自身的__slot__加上父类的__slot__
+25.__str__()方法返回用户看到的字符串 __repr__()方法为调试服务，返回程序开发者看到的字符串
+26.__iter__()方法返回一个迭代对象，for循环不断调用该迭代对象的__next__()方法直到遇到StopIteration错误
+27.__getitem__()方法按下标取出元素
+28.__getattr__()方法动态返回一个属性
+29.__call__()方法调用实例本身
+	callable()函数判断一个对象是否可调用
+30.异常处理：try...except...(else...)finally...
+31.assert 断言调试,失败则抛出AssertionError python -0 xxx.py可关闭assert
+32.logging.basicConfig(level=debug,info,warning,error)
+33.python -m pdb xxx.py 单步调试 l查看代码 n单步执行代码 p+变量名 查看变量 q结束调试
+	pdb.set_trace()设置断点 c继续执行
+34.单元测试：继承unitTest.TestCase，不以test开头的方法测试时不被执行;常用assertEqual()
+	运行单元测试：方法一：if __name__ == '__main__': unittest.main()
+				方法二：python -m unittest xxx
+	setUp() tearDown() 在每调用一个测试方法的前后分别被执行
+35.文件IO：with open('/path/to/file','r',encoding='gbk',errors='ignore') as file: file.read(size)
+	StringIO内存中读写str; bytesIO内存中读写二进制数据
+36.os模块提供操作系统提供的接口函数
+	合并路径：os.path.join() 正确处理不同操作系统的路径分隔符
+	拆分路径：os.path.split() 后一部分总是最后级别的目录或文件名
+				os.path.splitext() 直接得到文件扩展名
+	重命名文件：os.rename()
+	删除文件：os.remove()
+37.序列化 变量从内存中变成可存储或传输的过程
+		pickle.dumps(content) 把对象序列化为bytes
+		pickle.dump(content, fileName) 把对象序列化后写入file-like Object
+	反序列化 变量内容从序列化的对象重新读到内存里
+		pickle.loads(bytes) 将bytes反序列化为对象
+		pickle.load(fileName) 从file-like Object中直接反序列化为对象
+38.JSON 
+	json.dumps() json.dump() json.loads() json.load()
+	json.dumps(class, default=lamdba obj:obj.__dict__) 将任意class转换成json
+	json.loads(json_str, object_hook=dict2Class) 将json转换成class
+39.多进程 各自拷贝一份变量，互不影响
+	os.fork() 自动把当前进程(父进程)复制一份(子进程)，分别返回 不能再windows调用
+	os.getpid() 获得进程id
+	os.getppid() 获得父进程id
+	
+	multiprocessing 跨平台多进程模块
+	p = Process(target=functionName, args='') p.start()启动进程 p.join() 同步进程
+	
+	Pool进程池
+	p = Pool(processNum) p.close() 不能继续添加新的Process p.join() 先调用close(),join()方法会等待所有子进程执行完毕
+	
+	subprocess子进程模块
+	subprocess.call([command,args])
+	subprocess.pOpen.communicate() 输入
+40.多线程 _thread是低级模块，threading是高级模块 
+	t = threading.Thread(target=functionName,name=threadName) t.start() t.join()
+	threading.currrent_thread() 返回当前线程实例
+	
+	Lock 同一进程的多线程共享变量，需要锁机制
+	创建锁：lock = threading.lock()
+	获取锁：lock.acquire()
+	释放锁：lock.release()
+	
+	GIL锁：Global Interpreter Lock python解释器导致多线程无法利用多核
+	
+	ThreadLocal
+	threading.local() 线程传递私有数据
+	
+41.datetime模块 from datetime import datetime
+	datetime.now() 获取当前时间
+	datetime.utcnow() 获取当前UTC时间
+	datetime.timestamp() 将datetime转换成timestamp
+	datetime.frimtimestamp() 将timestamp转换成本地时间datetime
+	datetime.utcfromtimestamp() 将timestamp转换成UTC时间datetime
+	datetime.strptime(string,format) str转换成datetime
+	datetime.strftime(format) datetime转换成str
+	timedelta() datetime加减
+	一个datetime类型有一个时区属性tzinfo，但是默认为None，强制设置时区
+	datetime.now().replace(tzinfo=timezone(timedelta(hours=8)))
+	利用带时区的datetime，通过astimezone()方法，可以转换到任意时区
+	datetime.astimezone(timezone(timedelta(hours=8))
+42.collections模块
+	namedtuple是一个函数，它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用属性而不是索引来引用tuple的某个元素
+	namedtuple(tupleName,[props])
+	
+	deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈
+	append() pop() 尾部增删 appendleft() popleft() 头部增删
+	
+	defaultdict(lambda:value) key不存在时，返回一个默认值
+	
+	OrderedDict Key会按照插入的顺序排列，不是Key本身排序
+43.itertools模块
+	itertools.count(num) 创建计数迭代器
+	itertools.cycle(string) 重复序列
+	itertools.repeat(string) 重复元素  itertools.repeat(string,num) 重复string元素num次
+	itertools.takewhile() 条件判断截取有限序列
+	itertools.chain() 串联一组迭代对象
+	itertools.groupby() 把迭代器中相邻的重复元素挑出来放在一起
+	
+	
